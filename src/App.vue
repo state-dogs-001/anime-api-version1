@@ -4,31 +4,53 @@
       <NavBarComponent @searchHandle="searchHandle" />
     </div>
     <div class="app-main mt-5">
-      <HomeComponent :data="dataSlice" />
-      <!-- Paginates -->
-      <div class="d-flex justify-content-center mt-5">
-        <nav aria-label="Page navigation example">
-          <ul class="pagination">
-            <li class="page-item">
-              <button class="page-link" aria-label="Previous" @click="prePage">
-                <span aria-hidden="true">&laquo;</span>
-              </button>
-            </li>
-            <li
-              class="page-item"
-              v-for="page in Math.ceil(data.length / perPage)"
-              :key="page"
-            >
-              <button class="page-link" @click="pageNumber(page)">{{ page }}</button>
-            </li>
-            <li class="page-item">
-              <button class="page-link" aria-label="Next" @click="nextPage">
-                <span aria-hidden="true">&raquo;</span>
-              </button>
-            </li>
-          </ul>
-        </nav>
-      </div>
+      <template v-if="data.length > 0">
+        <HomeComponent :data="dataSlice" />
+        <!-- Paginates -->
+        <div class="d-flex justify-content-center mt-5">
+          <nav aria-label="Page navigation example">
+            <ul class="pagination">
+              <li class="page-item">
+                <button
+                  class="page-link text-warning"
+                  aria-label="Previous"
+                  @click="prePage"
+                >
+                  <span aria-hidden="true">&laquo;</span>
+                </button>
+              </li>
+              <li
+                class="page-item"
+                v-for="page in Math.ceil(data.length / perPage)"
+                :key="page"
+              >
+                <button
+                  class="page-link text-warning"
+                  @click="pageNumber(page)"
+                >
+                  {{ page }}
+                </button>
+              </li>
+              <li class="page-item">
+                <button
+                  class="page-link text-warning"
+                  aria-label="Next"
+                  @click="nextPage"
+                >
+                  <span aria-hidden="true">&raquo;</span>
+                </button>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </template>
+      <template v-else>
+        <b-row>
+          <b-col class="page-not-found text-center">
+            <h3>Not Found Anithing</h3>
+          </b-col>
+        </b-row>
+      </template>
     </div>
     <div class="app-bottom">
       <FooterComponent />
@@ -93,7 +115,7 @@ export default {
       }
     },
     pageNumber(page) {
-      this.page = page
+      this.page = page;
     },
   },
 };
@@ -109,5 +131,18 @@ export default {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+}
+.app-main {
+  min-height: 60vh;
+}
+.page-not-found {
+  min-height: 56vh;
+  position: relative;
+}
+.page-not-found h3{
+  top: 50%;
+ left: 50%;
+ transform: translate(-50%, -50%);
+ position: absolute;
 }
 </style>

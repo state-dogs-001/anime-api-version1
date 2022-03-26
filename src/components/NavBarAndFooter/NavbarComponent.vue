@@ -1,7 +1,9 @@
 <template>
   <div>
     <b-navbar toggleable="lg" type="dark" variant="warning" fixed="top">
-      <b-navbar-brand>Anime API Test</b-navbar-brand>
+      <b-navbar-brand style="text-transform: uppercase" href="/">
+        Anime API Test
+      </b-navbar-brand>
 
       <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 

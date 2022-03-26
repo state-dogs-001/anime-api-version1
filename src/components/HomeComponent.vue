@@ -24,8 +24,7 @@
             <a
               :href="anime.url"
               target="_blank"
-              variant="primary"
-              class="btn btn-primary"
+              class="btn btn-danger text-light btn-block"
               >Read More</a
             >
           </b-card>
